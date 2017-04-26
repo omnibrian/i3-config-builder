@@ -1,5 +1,11 @@
-import colorama
-colorama.init()
+# main.py
+#
+# i3cfgbuild: i3-config-builder project
+#
+# Author: Brian LeBlanc
+#
+# Description:
+#   Main script for i3 configuration file assembler
 
 from argparse import ArgumentParser
 from codecs import open
@@ -68,10 +74,10 @@ def main():
     output_file = os.path.realpath(args.output_dir) + '/config'
     extension = 'i3conf'
 
-    print("Building i3 configuration file for host: {hostname}".format(hostname=hostname))
+    print('Building i3 configuration file for host: ' + hostname)
 
     # Find file names of input files
-    file_names = [f for f in glob.glob("{}*[0-9]-*-*.{}".format(base_dir, extension)) if '-all-' in f or '-' + hostname + '-' in f]
+    file_names = [f for f in glob.glob(base_dir + '*[0-9]-*-*.' + extension) if '-all-' in f or '-' + hostname + '-' in f]
     file_names.sort()
 
     print('Found configuration files:')
@@ -88,14 +94,13 @@ def main():
                     'contents': open_file.read()
                 })
         except Exception as e:
-            print("Exception: {}".format(e))
-            print("Failed to read input file: {}".format(f))
+            print('Exception: ' + e)
+            print('Failed to read input file: ' + f)
             sys.exit(1)
 
     # Backup existing output file if it exists
     if os.path.exists(output_file):
-        print("Backing up current config to: {}"
-                .format(output_file + '.bak'))
+        print('Backing up current config to: ' + output_file + '.bak')
         if os.path.exists(output_file + '.bak'):
             if not query_yes_no('There is already a backed up config, overwrite?'):
                 if not query_yes_no('Continue without backing up config?'):
@@ -107,7 +112,7 @@ def main():
     with open(output_file, 'w') as config:
         for config_part in config_files:
             config.write(
-                "###############\n# Part file: {}\n\n{}\n###############\n\n"
+                "###############\n# Part file: {}\n{}\n###############\n\n"
                 .format(config_part['name'], config_part['contents'])
             )
 
@@ -119,7 +124,7 @@ def main():
         print('Reloading i3')
         call(['i3', 'reload'])
 
-    print("New config created at: {}".format(output_file))
+    print('New config created at: ' + output_file)
 
 
 if __name__ == '__main__':
