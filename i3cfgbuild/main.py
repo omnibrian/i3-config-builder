@@ -39,6 +39,23 @@ def get_args():
     return args
 
 
+# Query for yes or no
+def query_yes_no(question):
+    valid = {
+        'yes': True,
+        'ye': True,
+        'y': True,
+        'no': False,
+        'n': False
+    }
+
+    while True:
+        sys.stdout.write(question + ' [y/n] ')
+        choice = input().lower()
+        if choice in valid:
+            return valid[choice]
+
+
 # Main function that gets called on execution
 def main():
     pass
@@ -77,6 +94,13 @@ def main():
 
     # Backup existing output file if it exists
     if os.path.exists(output_file):
+        print("Backing up current config to: {}"
+                .format(output_file + '.bak'))
+        if os.path.exists(output_file + '.bak'):
+            if not query_yes_no('There is already a backed up config, overwrite?'):
+                if not query_yes_no('Continue without backing up config?'):
+                    print('Exiting')
+                    sys.exit(0)
         os.rename(output_file, output_file + '.bak')
 
     # Write all the config files to a single file
