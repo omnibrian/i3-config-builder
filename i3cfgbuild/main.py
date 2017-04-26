@@ -80,10 +80,10 @@ def main():
         os.rename(output_file, output_file + '.bak')
 
     # Write all the config files to a single file
-    with open(output_file, 'w', 'utf-8-sig') as config:
+    with open(output_file, 'w') as config:
         for config_part in config_files:
             config.write(
-                "#################\n# Part file: {} #\n{}\n##############\n\n"
+                "###############\n# Part file: {}\n\n{}\n###############\n\n"
                 .format(config_part['name'], config_part['contents'])
             )
 
