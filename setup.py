@@ -10,7 +10,7 @@ with open(path.join(here, 'README.rst'), encoding='utf-8') as f:
 
 setup(
     name = 'i3-config-builder',
-    version = '0.1',
+    version = '0.2',
     description = 'Command Line i3 config builder',
     long_description = long_description,
     author = 'Brian LeBlanc',
@@ -18,7 +18,7 @@ setup(
     url = 'https://github.com/brileb73/i3-config-builder',
     license = 'MIT',
     packages = find_packages(exclude = ['contrib', 'docs', 'tests']),
-    install_requires = ['argparse'],
+    install_requires = ['argparse','future'],
     extras_require = {
         ':python_version=="2.6"': [
             'argparse>=1.1'

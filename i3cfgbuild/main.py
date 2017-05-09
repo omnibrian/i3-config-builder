@@ -8,6 +8,7 @@
 #   Main script for i3 configuration file assembler
 
 from argparse import ArgumentParser
+from builtins import input
 from codecs import open
 from subprocess import call
 import os
