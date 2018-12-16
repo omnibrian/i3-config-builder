@@ -5,7 +5,7 @@ Python based configuration assembler. This project takes several separate config
 
 This is to help with managing different i3 configurations for different computers. This project allows for separate config files for different hostnames.
 
-This project can be found at https://github.com/brileb73/i3-config-builder and is based on the work done by simpss over at https://github.com/simpss/i3_config.
+This project can be found at https://github.com/omnibrian/i3-config-builder and is based on the work done by simpss over at https://github.com/simpss/i3_config.
 
 
 Usage
